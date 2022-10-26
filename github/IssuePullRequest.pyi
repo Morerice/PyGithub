@@ -1,4 +1,3 @@
-from datetime import datetime
 from typing import Any, Dict
 
 from github.GithubObject import NonCompletableGithubObject
@@ -6,8 +5,6 @@ from github.GithubObject import NonCompletableGithubObject
 class IssuePullRequest(NonCompletableGithubObject):
     def _initAttributes(self) -> None: ...
     def _useAttributes(self, attributes: Dict[str, Any]) -> None: ...
-    @property
-    def merged_at(self) -> datetime: ...
     @property
     def diff_url(self) -> str: ...
     @property
