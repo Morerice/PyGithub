@@ -40,7 +40,6 @@ class IssuePullRequest(github.GithubObject.NonCompletableGithubObject):
         """
         :type: datetime.datetime
         """
-        self._completeIfNotSet(self._merged_at)
         return self._merged_at.value
 
     @property
