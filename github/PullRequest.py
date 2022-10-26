@@ -268,6 +268,14 @@ class PullRequest(github.GithubObject.CompletableGithubObject):
         return self._merged_at.value
 
     @property
+    def merged_at(self):
+        """
+        :type: datetime.datetime
+        """
+        self._completeIfNotSet(self._merged_at)
+        return self._merged_at.value
+
+    @property
     def merged_by(self):
         """
         :type: :class:`github.NamedUser.NamedUser`
@@ -971,6 +979,7 @@ class PullRequest(github.GithubObject.CompletableGithubObject):
         self._mergeable_state = github.GithubObject.NotSet
         self._merged = github.GithubObject.NotSet
         self._merged_at = github.GithubObject.NotSet
+        self._merged_at = github.GithubObject.NotSet
         self._merged_by = github.GithubObject.NotSet
         self._milestone = github.GithubObject.NotSet
         self._number = github.GithubObject.NotSet
@@ -1062,6 +1071,9 @@ class PullRequest(github.GithubObject.CompletableGithubObject):
         if "merged" in attributes:  # pragma no branch
             self._merged = self._makeBoolAttribute(attributes["merged"])
         if "merged_at" in attributes:  # pragma no branch
+            self._merged_at = self._makeDatetimeAttribute(attributes["merged_at"])
+        if "merged_at" in attributes:  # pragma no branch
+            assert attributes["merged_at"] is None or isinstance(attributes["merged_at"], (str, unicode)), attributes["merged_at"]
             self._merged_at = self._makeDatetimeAttribute(attributes["merged_at"])
         if "merged_by" in attributes:  # pragma no branch
             self._merged_by = self._makeClassAttribute(
