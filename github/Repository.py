@@ -2496,7 +2496,6 @@ class Repository(github.GithubObject.CompletableGithubObject):
         direction=github.GithubObject.NotSet,
         since=github.GithubObject.NotSet,
         creator=github.GithubObject.NotSet,
-        per_page=github.GithubObject.NotSet
     ):
         """
         :calls: `GET /repos/{owner}/{repo}/issues <https://docs.github.com/en/rest/reference/issues>`_
@@ -2509,7 +2508,6 @@ class Repository(github.GithubObject.CompletableGithubObject):
         :param direction: string
         :param since: datetime.datetime
         :param creator: string or :class:`github.NamedUser.NamedUser`
-        :param per_page: integer
         :rtype: :class:`github.PaginatedList.PaginatedList` of :class:`github.Issue.Issue`
         """
         assert (
@@ -2543,7 +2541,6 @@ class Repository(github.GithubObject.CompletableGithubObject):
             or isinstance(creator, github.NamedUser.NamedUser)
             or isinstance(creator, str)
         ), creator
-        assert per_page is github.GithubObject.NotSet or isinstance(per_page, int), per_page
         url_parameters = dict()
         if milestone is not github.GithubObject.NotSet:
             if isinstance(milestone, str):
@@ -2577,8 +2574,6 @@ class Repository(github.GithubObject.CompletableGithubObject):
                 url_parameters["creator"] = creator
             else:
                 url_parameters["creator"] = creator._identity
-        if per_page is not github.GithubObject.NotSet:
-            url_parameters["per_page"] = per_page
         return github.PaginatedList.PaginatedList(
             github.Issue.Issue, self._requester, f"{self.url}/issues", url_parameters
         )
