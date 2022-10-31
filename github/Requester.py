@@ -525,6 +525,7 @@ class Requester:
 
         self.NEW_DEBUG_FRAME(requestHeaders)
 
+        print('Requesting URL: ', url)
         status, responseHeaders, output = self.__requestRaw(
             cnx, verb, url, requestHeaders, encoded_input
         )
